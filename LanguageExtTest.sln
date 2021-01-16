@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageExtTest", "LanguageExtTest\LanguageExtTest.csproj", "{992FE599-C7C9-4B9A-95F3-C5119F2CCCBE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{992FE599-C7C9-4B9A-95F3-C5119F2CCCBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{992FE599-C7C9-4B9A-95F3-C5119F2CCCBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{992FE599-C7C9-4B9A-95F3-C5119F2CCCBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{992FE599-C7C9-4B9A-95F3-C5119F2CCCBE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
