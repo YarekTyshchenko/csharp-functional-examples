@@ -2,8 +2,5 @@ namespace LanguageExtTest.RecordsAndValues.Clean
 {
     using LanguageExtTest.PrimitiveValueTypes;
 
-    public record OrganizationId : NonEmptyString
-    {
-        public OrganizationId(string value) : base(value) {}
-    }
+    public record OrganizationId(string Id) : NonEmptyString(Id);
 }
