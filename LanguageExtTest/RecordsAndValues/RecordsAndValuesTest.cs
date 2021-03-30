@@ -5,8 +5,10 @@
 namespace LanguageExtTest.RecordsAndValues
 {
     using System;
+    using System.Collections.Generic;
     using LanguageExtTest.PrimitiveValueTypes;
     using LanguageExtTest.RecordsAndValues.Clean;
+    using Microsoft.VisualStudio.TestPlatform.ObjectModel;
     using Xunit;
 
     public class RecordsAndValuesTest
@@ -53,6 +55,21 @@ namespace LanguageExtTest.RecordsAndValues
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new Gateway(new GatewayId(Guid.Empty), new OrganizationId("a")));
+        }
+
+        private record Foo(Guid Id) : NonEmptyGeneric<Guid>(Id);
+
+        // Value types weird
+        private record Bar(bool B) : NonEmptyGeneric<bool>(B);
+
+        // Reference types default is null
+        private record Faz(List<string> L) : NonEmptyGeneric<List<string>>(L);
+        
+        [Fact]
+        public void EmptyString()
+        {
+            var a = default(List<string>);
+            Console.WriteLine($"A is {a == null}");
         }
     }
 }

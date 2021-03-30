@@ -4,18 +4,18 @@ namespace LanguageExtTest.PrimitiveValueTypes
 
     public record NonEmptyString
     {
-        private readonly string _value;
+        private readonly string value;
 
         public NonEmptyString(string value)
         {
-            if (value == string.Empty)
+            if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentOutOfRangeException(nameof(_value));
+                throw new ArgumentOutOfRangeException(nameof(value));
             }
 
-            _value = value;
+            this.value = value;
         }
 
-        public static implicit operator string(NonEmptyString value) => value._value;
+        public static implicit operator string(NonEmptyString value) => value.value;
     }
 }
