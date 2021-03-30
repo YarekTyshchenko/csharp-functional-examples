@@ -11,6 +11,15 @@ namespace LanguageExtTest.Tests.PrimitiveValueTypes
     public class NonEmptyStringTests
     {
         [Fact]
+        public void Construct_String_WithValue()
+        {
+            var s = "=== string ===";
+            var value = new BusinessStringValue(s);
+            Assert.IsType<BusinessStringValue>(value);
+            Assert.Equal(s, value);
+        }
+
+        [Fact]
         public void Construct_String_WithNull()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new BusinessStringValue(null!));
@@ -22,36 +31,66 @@ namespace LanguageExtTest.Tests.PrimitiveValueTypes
             Assert.Throws<ArgumentOutOfRangeException>(() => new BusinessStringValue(string.Empty));
         }
 
-        [Fact]
-        public void Construct_String_WithValue()
-        {
-            var s = "=== string ===";
-            var value = new BusinessStringValue(s);
-            Assert.IsType<BusinessStringValue>(value);
-            Assert.Equal(s, value);
-        }
-
         public record Foo(NonEmptyString Bar);
 
         [Fact]
-        public void Cast_String_WithEmpty()
+        public void DeserializeNewtonsoft_String_WithValue()
         {
-            // NonEmptyString a = (NonEmptyString)"";
-            // Logger.LogInformation(a);
-            // var obj = JsonConvert.DeserializeObject<Foo?>(@"{""Bar"":""""}");
-            // if (obj is not null)
-            // {
-            //     Assert.IsType<Guid>(obj.Id);
-            //     Logger.LogInformation($"ID is {obj.Id}");
-            // }
-            //
-            //var bar = obj.Bar;
-            // Logger.LogInformation($"Obj is {obj}");
-            // Assert.NotNull(obj);
-            // var nes = obj!.Bar;
-            // //Assert.Equal("a", nes);
-            // Assert.IsType<NonEmptyString>(nes);
+            var foo = Newtonsoft.Json.JsonConvert.DeserializeObject<Foo>(@"{""Bar"":""bar""}");
+            Assert.NotNull(foo);
+            Assert.IsType<NonEmptyString>(foo.Bar);
+            Assert.Equal("bar", foo.Bar);
+        }
 
+        [Fact]
+        public void DeserializeNewtonsoft_String_WithEmpty()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => Newtonsoft.Json.JsonConvert.DeserializeObject<Foo>(@"{""Bar"":""""}"));
+        }
+
+        [Fact]
+        public void DeserializeNewtonsoft_String_WithNull()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => Newtonsoft.Json.JsonConvert.DeserializeObject<Foo>(@"{""Bar"":null}"));
+        }
+        
+        [Fact]
+        public void DeserializeSystem_String_WithValue()
+        {
+            var foo = System.Text.Json.JsonSerializer.Deserialize<Foo>(@"{""Bar"":""bar""}");
+            Assert.NotNull(foo);
+            Assert.IsType<NonEmptyString>(foo!.Bar);
+            Assert.Equal("bar", foo.Bar);
+        }
+
+        [Fact]
+        public void DeserializeSystem_String_WithEmpty()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => System.Text.Json.JsonSerializer.Deserialize<Foo>(@"{""Bar"":""""}"));
+        }
+
+        [Fact(Skip = "System Deserialization is broken")]
+        public void DeserializeSystem_String_WithNull()
+        {
+            var a = System.Text.Json.JsonSerializer.Deserialize<Foo>(@"{""Bar"":null}");
+            Assert.NotNull(a);
+            Assert.NotNull(a!.Bar);
+            
+            // Assert.Throws<ArgumentOutOfRangeException>(() => System.Text.Json.JsonSerializer.Deserialize<Foo>(@"{""Bar"":null}"));
+        }
+
+        [Fact]
+        public void SerializeNewtonsoft_String_WithValue()
+        {
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(new Foo(new NonEmptyString("bar")));
+            Assert.Equal(@"{""Bar"":""bar""}", json);
+        }
+
+        [Fact]
+        public void SerializeSystem_String_WithValue()
+        {
+            var json = System.Text.Json.JsonSerializer.Serialize(new Foo(new NonEmptyString("bar")));
+            Assert.Equal(@"{""Bar"":""bar""}", json);
         }
     }
 
