@@ -2,7 +2,7 @@
 // Copyright (c) HARK. All rights reserved.
 // </copyright>
 
-namespace LanguageExtTest.PrimitiveValueTypes
+namespace LanguageExtTest.Tests.PrimitiveValueTypes
 {
     using System;
     using Newtonsoft.Json;

@@ -2,13 +2,12 @@
 // Copyright (c) HARK. All rights reserved.
 // </copyright>
 
-namespace LanguageExtTest.RecordsAndValues
+namespace LanguageExtTest.Tests.RecordsAndValues
 {
     using System;
     using System.Collections.Generic;
     using LanguageExtTest.PrimitiveValueTypes;
     using LanguageExtTest.RecordsAndValues.Clean;
-    using Microsoft.VisualStudio.TestPlatform.ObjectModel;
     using Xunit;
 
     public class RecordsAndValuesTest

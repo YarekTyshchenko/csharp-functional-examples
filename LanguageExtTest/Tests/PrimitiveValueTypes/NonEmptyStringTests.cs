@@ -2,12 +2,10 @@
 // Copyright (c) HARK. All rights reserved.
 // </copyright>
 
-namespace LanguageExtTest.PrimitiveValueTypes
+namespace LanguageExtTest.Tests.PrimitiveValueTypes
 {
     using System;
-    using LanguageExtTest.RecordsAndValues.Clean;
-    using Toolkit.Core.Extensions;
-    using Toolkit.Core.Logging;
+    using LanguageExtTest.PrimitiveValueTypes;
     using Xunit;
 
     public class NonEmptyStringTests
